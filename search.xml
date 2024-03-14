@@ -22,9 +22,6 @@
 <p>-x 排除的响应状态码(以逗号分隔,支持指定范围)  如(-x 301,500-599)</p>
 </blockquote>
 ]]></content>
-      <tags>
-        <tag>usetools</tag>
-      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -77,8 +74,5 @@
                       alt="Test"
                 ></p>
 ]]></content>
-      <tags>
-        <tag>tips</tag>
-      </tags>
   </entry>
 </search>
