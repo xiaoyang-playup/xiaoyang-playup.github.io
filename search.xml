@@ -74,23 +74,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>本地局域网文件传输</title>
-    <url>/2024/03/14/%E6%9C%AC%E5%9C%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</url>
-    <content><![CDATA[<p>前提条件，拥有python环境</p>
-<p>在命令行直接输入<code>python -m http.server 8888</code></p>
-<p>完成</p>
-<p>注意：<font color=red>当前所在文件路径，就是之后访问的路径。888是定义端口名称，可以随便改成未被占用的端口。</font></p>
-<p>使用：</p>
-<p>用ip进行访问</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="D:\typora截图\2.png"
-                      alt="Test"
-                ></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2024/02/15/hello-world/</url>
     <content><![CDATA[<p><img  
@@ -123,6 +106,23 @@
 <blockquote>
 <p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
 </blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>本地局域网文件传输</title>
+    <url>/2024/03/14/%E6%9C%AC%E5%9C%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</url>
+    <content><![CDATA[<p>前提条件，拥有python环境</p>
+<p>在命令行直接输入<code>python -m http.server 8888</code></p>
+<p>完成</p>
+<p>注意：<font color=red>当前所在文件路径，就是之后访问的路径。888是定义端口名称，可以随便改成未被占用的端口。</font></p>
+<p>使用：</p>
+<p>用ip进行访问</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\typora截图\2.png"
+                      alt="Test"
+                ></p>
 ]]></content>
   </entry>
 </search>
