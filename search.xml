@@ -8,27 +8,27 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\3.png"
-                      alt="Test"
+                     data-src="/images/3.png"
+                      alt="test"
                 ></p>
 <p>3、创建一个新的NAT网络</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\4.jpg"
+                     data-src="/images/4.jpg"
                       alt="Test"
                 ></p>
 <p>4、kali设置网卡1为NAT，网卡2为Host-only</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\4.png"
+                     data-src="/images/4.png"
                       alt="test"
                 ></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\5.png"
+                     data-src="/images/5.png"
                       alt="test"
                 ></p>
 <p>靶机只设置一个网卡为Host-only就可以了。</p>
@@ -36,7 +36,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\6.png"
+                     data-src="/images/6.png"
                       alt="tesk"
                 ></p>
 <p>eth0:net，eth1:host-only</p>
@@ -44,14 +44,11 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="D:\typora截图\8.png"
+                     data-src="/images/7.png"
                       alt="test"
                 ></p>
 <p>这样便可以找到靶机ip。</p>
 ]]></content>
-      <tags>
-        <tag>打靶笔记</tag>
-      </tags>
   </entry>
   <entry>
     <title>dirsearch命令使用</title>
@@ -74,6 +71,23 @@
 <p>-i 保留的响应状态码(以逗号分隔,支持指定范围) 如(-i 200,300-399)</p>
 <p>-x 排除的响应状态码(以逗号分隔,支持指定范围)  如(-x 301,500-599)</p>
 </blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>本地局域网文件传输</title>
+    <url>/2024/03/14/%E6%9C%AC%E5%9C%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</url>
+    <content><![CDATA[<p>前提条件，拥有python环境</p>
+<p>在命令行直接输入<code>python -m http.server 8888</code></p>
+<p>完成</p>
+<p>注意：<font color=red>当前所在文件路径，就是之后访问的路径。888是定义端口名称，可以随便改成未被占用的端口。</font></p>
+<p>使用：</p>
+<p>用ip进行访问</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\typora截图\2.png"
+                      alt="Test"
+                ></p>
 ]]></content>
   </entry>
   <entry>
@@ -109,23 +123,6 @@
 <blockquote>
 <p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
 </blockquote>
-]]></content>
-  </entry>
-  <entry>
-    <title>本地局域网文件传输</title>
-    <url>/2024/03/14/%E6%9C%AC%E5%9C%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</url>
-    <content><![CDATA[<p>前提条件，拥有python环境</p>
-<p>在命令行直接输入<code>python -m http.server 8888</code></p>
-<p>完成</p>
-<p>注意：<font color=red>当前所在文件路径，就是之后访问的路径。888是定义端口名称，可以随便改成未被占用的端口。</font></p>
-<p>使用：</p>
-<p>用ip进行访问</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="D:\typora截图\2.png"
-                      alt="Test"
-                ></p>
 ]]></content>
   </entry>
 </search>
