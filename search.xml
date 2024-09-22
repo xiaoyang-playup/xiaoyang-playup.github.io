@@ -51,29 +51,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>dirsearch命令使用</title>
-    <url>/2024/03/11/dirsearch%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>python dirsearch.py -u &#x2F;&#x2F; -u是url的缩写。 指定目标网站</p>
-<p>python dirsearch.py -u example.com -e* &#x2F;&#x2F;-e 代表指定要的文件类型，eg这是一个java的网站就可以-e jsp。*代表就是全部类型扫描。</p>
-<p>python dirsearch.py -u example.com -e* -i 200 &#x2F;&#x2F;-i 代表返回状态码，200就是成功。就是我只要显示返回成功的目录或文件</p>
-<p>python dirsearch.py -u example.com -e* -i 200 -s 1 &#x2F;&#x2F;-s代表延时扫描。因为扫描速度过快容易被封ip 所以需要进行速率限制1代表延迟1秒</p>
-</blockquote>
-<blockquote>
-<p>常用命令:</p>
-<p>–version 显示dirsearch的版本</p>
-<p>-h –help 帮助提示</p>
-<p>-u –url 指定网址</p>
-<p>-e 指定网站语言</p>
-<p>-w 指定字典</p>
-<p>-r 递归目录（跑出目录后，继续跑目录下面的目录）</p>
-<p>-l –url-list&#x3D;FILE   目标url文件路径</p>
-<p>-i 保留的响应状态码(以逗号分隔,支持指定范围) 如(-i 200,300-399)</p>
-<p>-x 排除的响应状态码(以逗号分隔,支持指定范围)  如(-x 301,500-599)</p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
     <title>CS联动MSF</title>
     <url>/2024/09/02/CS%E8%81%94%E5%8A%A8MSF/</url>
     <content><![CDATA[<h1 id="CS联动MSF"><a href="#CS联动MSF" class="headerlink" title="CS联动MSF"></a>CS联动MSF</h1><p>靶机：win7</p>
@@ -190,6 +167,29 @@
 <p>刷新个人博客，我一般使用如下命令来刷新博客。</p>
 <blockquote>
 <p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>dirsearch命令使用</title>
+    <url>/2024/03/11/dirsearch%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>python dirsearch.py -u &#x2F;&#x2F; -u是url的缩写。 指定目标网站</p>
+<p>python dirsearch.py -u example.com -e* &#x2F;&#x2F;-e 代表指定要的文件类型，eg这是一个java的网站就可以-e jsp。*代表就是全部类型扫描。</p>
+<p>python dirsearch.py -u example.com -e* -i 200 &#x2F;&#x2F;-i 代表返回状态码，200就是成功。就是我只要显示返回成功的目录或文件</p>
+<p>python dirsearch.py -u example.com -e* -i 200 -s 1 &#x2F;&#x2F;-s代表延时扫描。因为扫描速度过快容易被封ip 所以需要进行速率限制1代表延迟1秒</p>
+</blockquote>
+<blockquote>
+<p>常用命令:</p>
+<p>–version 显示dirsearch的版本</p>
+<p>-h –help 帮助提示</p>
+<p>-u –url 指定网址</p>
+<p>-e 指定网站语言</p>
+<p>-w 指定字典</p>
+<p>-r 递归目录（跑出目录后，继续跑目录下面的目录）</p>
+<p>-l –url-list&#x3D;FILE   目标url文件路径</p>
+<p>-i 保留的响应状态码(以逗号分隔,支持指定范围) 如(-i 200,300-399)</p>
+<p>-x 排除的响应状态码(以逗号分隔,支持指定范围)  如(-x 301,500-599)</p>
 </blockquote>
 ]]></content>
   </entry>
